@@ -1,9 +1,0 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "com.tiktak.kronos.develop",
-    "sha256_cert_fingerprints":
-    ["78:94:CB:7D:D3:50:4D:8F:7A:39:49:1E:C2:E7:50:37:48:7E:E3:DA:09:DF:09:8F:A1:E5:CD:72:7D:B3:4D:F7"]
-  }
-}]
