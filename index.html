@@ -3,39 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Tab Messaging Example</title>
+    <title>Custom Tabs Post Message</title>
 </head>
 <body>
-    <h1>Custom Tab Messaging Example</h1>
-    <button id="sendMessageBtn">Send Message to Android</button>
-    <div id="receivedMessage"></div>
+    <h1>Post Message Example</h1>
+    <button onclick="sendMessage()">Send Message</button>
 
     <script>
-        // Android'e mesaj göndermek için fonksiyon
-        function sendMessageToAndroid(message) {
-            if (window.chrome && window.chrome.webview) {
-                // Android'e mesaj gönder
-                window.chrome.webview.postMessage(message);
-            } else {
-                console.log('Chrome Custom Tabs API not available');
-            }
+        function sendMessage() {
+            // Android'deki Chrome Custom Tabs'e postMessage gönderir
+            window.postMessage('Hello from the web page!', '*');
         }
-
-        // Android'den gelen mesajları dinleme
-        window.addEventListener('message', function(event) {
-            console.log('Received message from Android:', event.data);
-            document.getElementById('receivedMessage').textContent = 'Received: ' + event.data;
-        });
-
-        // Butona tıklandığında mesaj gönder
-        document.getElementById('sendMessageBtn').addEventListener('click', function() {
-            sendMessageToAndroid('Hello from Web Page!');
-        });
-
-        // Sayfa yüklendiğinde Android'e bildir
-        window.addEventListener('load', function() {
-            sendMessageToAndroid('Page Loaded');
-        });
     </script>
 </body>
 </html>
