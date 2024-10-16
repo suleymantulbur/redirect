@@ -1,23 +1,41 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Transaction Done</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Tab Messaging Example</title>
+</head>
+<body>
+    <h1>Custom Tab Messaging Example</h1>
+    <button id="sendMessageBtn">Send Message to Android</button>
+    <div id="receivedMessage"></div>
+
     <script>
-      // Sayfa yüklendiğinde mesaj gönder
-      document.addEventListener('DOMContentLoaded', function() {
-        if (window.chrome && window.chrome.webview && window.chrome.webview.postMessage) {
-          // Android uygulamasına 'transactionDone' mesajını gönder
-          window.chrome.webview.postMessage('transactionDone');
+        // Android'e mesaj göndermek için fonksiyon
+        function sendMessageToAndroid(message) {
+            if (window.chrome && window.chrome.webview) {
+                // Android'e mesaj gönder
+                window.chrome.webview.postMessage(message);
+            } else {
+                console.log('Chrome Custom Tabs API not available');
+            }
         }
-        // Ardından tiktak URL'sine yönlendir
-        setTimeout(function() {
-          window.location.href = "tiktak://ocr-transaction-done";
-        }, 1000); // 1 saniye bekleme süresi (isteğe göre ayarlayabilirsiniz)
-      });
+
+        // Android'den gelen mesajları dinleme
+        window.addEventListener('message', function(event) {
+            console.log('Received message from Android:', event.data);
+            document.getElementById('receivedMessage').textContent = 'Received: ' + event.data;
+        });
+
+        // Butona tıklandığında mesaj gönder
+        document.getElementById('sendMessageBtn').addEventListener('click', function() {
+            sendMessageToAndroid('Hello from Web Page!');
+        });
+
+        // Sayfa yüklendiğinde Android'e bildir
+        window.addEventListener('load', function() {
+            sendMessageToAndroid('Page Loaded');
+        });
     </script>
-    <meta http-equiv="refresh" content="5; url=tiktak://ocr-transaction-done">
-  </head>
-  <body>
-    <h4>Ocr Transaction Done android</h4>
-  </body>
+</body>
 </html>
