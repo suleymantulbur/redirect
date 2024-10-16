@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-  <html>
-    <head>
-      <title>Transaction Done</title>
-       <meta http-equiv="refresh" content="0; url=tiktak://ocr-transaction-done">
-    </head>
+<html>
+  <head>
+    <title>Transaction Done</title>
+    <script>
+      // Sayfa yüklendiğinde mesaj gönder
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.chrome && window.chrome.webview && window.chrome.webview.postMessage) {
+          // Android uygulamasına 'transactionDone' mesajını gönder
+          window.chrome.webview.postMessage('transactionDone');
+        }
+        // Ardından tiktak URL'sine yönlendir
+        setTimeout(function() {
+          window.location.href = "tiktak://ocr-transaction-done";
+        }, 1000); // 1 saniye bekleme süresi (isteğe göre ayarlayabilirsiniz)
+      });
+    </script>
+    <meta http-equiv="refresh" content="5; url=tiktak://ocr-transaction-done">
+  </head>
   <body>
-    <h4>Ocr Trsansaction Done</h4>
+    <h4>Ocr Transaction Done</h4>
   </body>
 </html>
