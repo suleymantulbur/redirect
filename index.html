@@ -12,7 +12,7 @@
     <script>
         function sendMessage() {
             // Android'deki Chrome Custom Tabs'e postMessage gönderir
-            window.postMessage('Hello from the web page!', '*');
+            window.chrome.postMessage('Hello from the web page!', '*');
         }
     </script>
 </body>
